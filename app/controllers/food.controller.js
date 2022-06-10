@@ -22,11 +22,15 @@ exports.findAll = async (req, res) => {
         return category.id == food.categoryId;
       })
       .map((food) => {
+        var detail = food.detail;
+        if (detail.length > 50) {
+          detail = detail.substring(0, 50) + "...";
+        }
         return {
           id: food.id,
           name: food.name,
           image: food.image,
-          detail: food.detail,
+          detail: detail,
           starRating: food.starRating,
           category: category.name,
         };
