@@ -26,6 +26,7 @@ exports.findAll = async (req, res) => {
           id: food.id,
           name: food.name,
           image: food.image,
+          detail: food.detail,
           starRating: food.starRating,
           category: category.name,
         };
