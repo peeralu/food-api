@@ -43,6 +43,8 @@ exports.findAll = async (req, res) => {
       menu: foods,
     };
   });
+  const buffer = Buffer.from(result);
+  res.set("Content-Length", buffer.length);
   res.status(200).json(success(result, res.statusCode));
 };
 
@@ -73,7 +75,8 @@ exports.findByCategory = async (req, res) => {
         category: data.category.name,
       };
     });
-
+    const buffer = Buffer.from(result);
+    res.set("Content-Length", buffer.length);
     res.status(200).json(success(result, res.statusCode));
   } else {
     res.status(401).json(error("food not found", 401));
@@ -108,7 +111,8 @@ exports.findDetail = async (req, res) => {
       price: food.price,
       isFavorite: food.users.length > 0,
     };
-
+    const buffer = Buffer.from(result);
+    res.set("Content-Length", buffer.length);
     res.status(200).json(success(result, res.statusCode));
   } else {
     return res
@@ -150,7 +154,6 @@ exports.favoriteFood = async (req, res) => {
         favorite.destroy();
         message = "remove favorite success";
       }
-
       res.status(200).json(
         success(
           {
