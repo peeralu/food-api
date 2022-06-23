@@ -1,5 +1,9 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/food.controller");
+const fs = require("fs");
+
+let rawdata = fs.readFileSync("mPOSData.json");
+// let student = JSON.parse(rawdata);
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -19,4 +23,9 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.favoriteFood
   );
+
+  app.get("/api/food/data/", (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.send(rawdata);
+  });
 };
