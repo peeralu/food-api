@@ -111,8 +111,6 @@ exports.findDetail = async (req, res) => {
       price: food.price,
       isFavorite: food.users.length > 0,
     };
-    const buffer = Buffer.from(result);
-    res.set("Content-Length", buffer.length);
     res.status(200).json(success(result, res.statusCode));
   } else {
     return res
